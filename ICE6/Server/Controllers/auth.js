@@ -26,9 +26,7 @@ function ProcessRegistration(req, res, next) {
             }
             return res.status(400).json({ success: false, msg: "ERROR: User not registered", data: null, token: null });
         }
-        return passport_1.default.authenticate('local')(req, res, () => {
-            return res.json({ success: true, msg: "User Logged in successfully", data: newUser, token: null });
-        });
+        return res.json({ success: true, msg: "User Registered successfully", data: newUser, token: null });
     });
 }
 exports.ProcessRegistration = ProcessRegistration;
