@@ -11,6 +11,8 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const express_session_1 = __importDefault(require("express-session"));
 const passport_1 = __importDefault(require("passport"));
+const memorystore_1 = __importDefault(require("memorystore"));
+const MemoryStore = (0, memorystore_1.default)(express_session_1.default);
 const cors_1 = __importDefault(require("cors"));
 const passport_jwt_1 = __importDefault(require("passport-jwt"));
 let JWTStrategy = passport_jwt_1.default.Strategy;
@@ -31,6 +33,8 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)());
 app.use((0, express_session_1.default)({
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({ checkPeriod: 86400000 }),
     secret: db_1.default.secret,
     saveUninitialized: false,
     resave: false
