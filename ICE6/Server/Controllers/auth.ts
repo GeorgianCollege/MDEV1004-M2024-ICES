@@ -3,6 +3,7 @@ import passport from 'passport';
 import mongoose from 'mongoose';
 
 import User from '../Models/user';
+import { GenerateToken } from '../Util';
 
 /**
  * Processes the Registration Request
@@ -27,7 +28,7 @@ export function ProcessRegistration(req:Request, res:Response, next:NextFunction
         if(err instanceof mongoose.Error.ValidationError)
         {
             console.error("All Fields are Required");
-            return res.status(400).json({success: false, msg: "ERROR: User not registered. All Fields are Required", data: null});
+            return res.status(400).json({success: false, msg: "ERROR: User not registered. All Fields are Required", data: null, token: null});
         }
 
         if(err)
@@ -37,12 +38,12 @@ export function ProcessRegistration(req:Request, res:Response, next:NextFunction
             {
                 console.error("ERROR: User already exists");
             }
-            return res.status(400).json({success: false, msg: "ERROR: User not registered", data: null});
+            return res.status(400).json({success: false, msg: "ERROR: User not registered", data: null, token: null});
         }
 
         return passport.authenticate('local')(req, res, () =>
         {
-            return res.json({success: true, msg: "User Logged in successfully", data: newUser});
+            return res.json({success: true, msg: "User Logged in successfully", data: newUser, token: null});
         });
     });
 }
@@ -63,14 +64,14 @@ export function ProcessLogin(req:Request, res:Response, next:NextFunction): void
         if(err)
         {
             console.error(err);
-            return res.status(400).json({success: false, msg: "ERROR: Server Error", data: null});
+            return res.status(400).json({success: false, msg: "ERROR: Server Error", data: null, token: null});
         }
 
         // are there any login errors?
         if(!user)
         {
             console.error("Login Error: User Credentials Error or User Not Found");
-            return res.status(400).json({success: false, msg: "ERROR: Login Error", data: null});
+            return res.status(400).json({success: false, msg: "ERROR: Login Error", data: null, token: null});
         }
 
         req.login(user, (err) =>
@@ -79,11 +80,14 @@ export function ProcessLogin(req:Request, res:Response, next:NextFunction): void
             if(err)
             {
                 console.error(err);
-                return res.status(400).json({success: false, msg: "ERROR: Database Error", data: null});
+                return res.status(400).json({success: false, msg: "ERROR: Database Error", data: null, token: null});
             }
+            
+            const authToken = GenerateToken(user);
 
-            return res.json({success: true, msg: "User Logged in successfully", data: user});
+            return res.json({success: true, msg: "User Logged in successfully", data: user, token: authToken});
         });
+        return;
     })(req, res, next);
 }
 
