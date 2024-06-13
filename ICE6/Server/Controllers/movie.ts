@@ -16,7 +16,7 @@ export function DisplayMovieList(req: Request, res: Response, next: NextFunction
     Movie.find({})
     .then((data) =>
     {
-        res.status(200).json({success: true, msg: "Movie List Retrieved and Displayed", data: data})
+        res.status(200).json({success: true, msg: "Movie List Retrieved and Displayed", data: data, token: null})
     })
     .catch((err) =>
     {
@@ -40,7 +40,7 @@ export function DisplayMovieById(req: Request, res: Response, next: NextFunction
     // ensure that the id is valid
     if (id.length != 24)
     {
-        res.status(400).json({success: false, msg: "A valid ID is required to retrive a movie", data: ""});
+        res.status(400).json({success: false, msg: "A valid ID is required to retrieve a movie", data: null, token: null});
     }
     else
     {
@@ -49,11 +49,11 @@ export function DisplayMovieById(req: Request, res: Response, next: NextFunction
         {
             if(data)
             {
-                res.status(200).json({success: true, msg: "One Movie Retrived and Displayed", data: data})
+                res.status(200).json({success: true, msg: "One Movie Retrieved and Displayed", data: data, token: null})
             }
             else
             {
-                res.status(404).json({success: false, msg: "Movie not found", data: ""});
+                res.status(404).json({success: false, msg: "Movie not found", data: null, token: null});
             }
         })
         .catch((err) =>
@@ -96,7 +96,7 @@ export function AddMovie(req: Request, res:Response, next: NextFunction): void
      Movie.create(movie)
      .then(() =>
      {
-        res.status(200).json({success: true, msg: "Movie added", data: movie});
+        res.status(200).json({success: true, msg: "Movie added", data: movie, token: null});
      })
      .catch((err) =>
      {
@@ -120,7 +120,7 @@ export function UpdateMovie(req:Request, res:Response, next:NextFunction): void
     // ensure that the id is valid
     if (id.length != 24)
     {
-        res.status(400).json({success: false, msg: "A valid ID is required to update a movie", data: ""});
+        res.status(400).json({success: false, msg: "A valid ID is required to update a movie", data: null, token: null});
     }
     else
     {
@@ -148,7 +148,7 @@ export function UpdateMovie(req:Request, res:Response, next:NextFunction): void
         Movie.updateOne({_id: id}, movieToUpdate)
         .then(() =>
         {
-            res.status(200).json({success: true, msg: "Movie updated", data: movieToUpdate});
+            res.status(200).json({success: true, msg: "Movie updated", data: movieToUpdate, token: null});
         })
         .catch((err) =>
         {
@@ -173,14 +173,14 @@ export function DeleteMovie(req:Request, res:Response, next:NextFunction): void
     // ensure that the id is valid
     if (id.length != 24)
     {
-        res.status(400).json({success: false, msg: "A valid ID is required to delete a movie", data: ""});
+        res.status(400).json({success: false, msg: "A valid ID is required to delete a movie", data: null, token: null});
     }
     else
     {
         Movie.deleteOne({_id: id})
         .then(() =>
         {
-            res.status(200).json({success: true, msg: "Movie deleted", data: id});
+            res.status(200).json({success: true, msg: "Movie deleted", data: id, token: null});
         })
         .catch((err) =>
         {
