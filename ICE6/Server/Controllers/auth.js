@@ -55,7 +55,7 @@ exports.ProcessLogin = ProcessLogin;
 function ProcessLogout(req, res, next) {
     req.logOut(() => {
         console.log("User Logged out successfully");
-        return res.json({ success: true, msg: "User Logged out successfully", data: null });
+        return res.json({ success: true, msg: "User Logged out successfully", data: null, token: null });
     });
 }
 exports.ProcessLogout = ProcessLogout;

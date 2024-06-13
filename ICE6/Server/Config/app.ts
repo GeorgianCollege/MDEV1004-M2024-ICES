@@ -37,6 +37,8 @@ mongoose.connection.on('connected', () => {
 
 
 import indexRouter from '../Routes/index';
+import movieRouter from '../Routes/movie';
+
 import { dot } from 'node:test/reporters';
 
 // create an express application
@@ -97,6 +99,7 @@ let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) =>
 passport.use(strategy);
 
 app.use('/api', indexRouter);
+app.use('/api/movie', movieRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -100,6 +100,6 @@ export function ProcessLogout(req:Request, res:Response, next:NextFunction): voi
 {
     req.logOut(()=>{
         console.log("User Logged out successfully");
-        return res.json({success: true, msg: "User Logged out successfully", data: null});
+        return res.json({success: true, msg: "User Logged out successfully", data: null, token: null});
     });
 }
