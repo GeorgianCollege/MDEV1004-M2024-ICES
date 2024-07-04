@@ -11,7 +11,7 @@ class DataManager private constructor()
 {
     companion object
     {
-        private const val BASE_URL = "https://mdev1004-m2024-api-q9bi.onrender.com/api/movie"
+        private const val BASE_URL = "https://mdev1004-m2024-api-q9bi.onrender.com/api/movie/"
 
         // converts JSON to Data we can use
         private val moshi: Moshi by lazy {
