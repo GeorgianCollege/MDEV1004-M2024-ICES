@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.moshi.kotlin)
 
+
     // testing Dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
