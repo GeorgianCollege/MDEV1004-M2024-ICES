@@ -31,6 +31,8 @@ class AddEditAPICRUDViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("ADD / EDIT ViewController")
+        
         if let movie = movie 
         {
             // Editing an Existing Movie
@@ -76,10 +78,12 @@ class AddEditAPICRUDViewController: UIViewController
         if let movie = movie {
             requestType = "PUT"
             urlString = "https://mdev1004-m2024-api-q9bi.onrender.com/api/movie/update/\(movie._id)"
+            //urlString = "http://localhost:3000/api/movie/update/\(movie._id)"
         }
         else {
             requestType = "POST"
             urlString = "https://mdev1004-m2024-api-q9bi.onrender.com/api/movie/add"
+            //urlString = "http://localhost:3000/api/movie/add"
         }
         
         guard let url = URL(string: urlString) else {
@@ -128,6 +132,10 @@ class AddEditAPICRUDViewController: UIViewController
         //Request
         do {
             request.httpBody = try JSONEncoder().encode(movie)
+            
+            print("Request")
+            print(movie)
+            
         } catch {
             print("Failed to encode movie: \(error)")
             return
@@ -135,11 +143,14 @@ class AddEditAPICRUDViewController: UIViewController
         
         // Response
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+        
+            
             if let error = error
             {
                 print("Failed to send request: \(error)")
                 return
             }
+        
             
             DispatchQueue.main.async
             {
