@@ -20,15 +20,25 @@ class MainActivity : AppCompatActivity()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Initialize the adapter with an empty list
+        firstAdapter = FirstAdapter(emptyList())
+        binding.FirstRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = firstAdapter
+        }
+
         viewModel.movies.observe(this) { movies ->
             movieList = movies.toMutableList()
-            firstAdapter = FirstAdapter(movies)
-
-            binding.FirstRecyclerView.apply {
-                layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = firstAdapter
-            }
+            firstAdapter.updateMovies(movies)
         }
+
+
+        firstAdapter.onMovieClick = { movie ->
+            val intent = Intent(this, DetailsActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
         viewModel.getAllMovies()
 

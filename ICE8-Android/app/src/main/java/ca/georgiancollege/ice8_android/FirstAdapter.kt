@@ -1,5 +1,6 @@
 package ca.georgiancollege.ice8_android
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import ca.georgiancollege.ice8_android.databinding.TextRowItemBinding
 class FirstAdapter(private var dataSet: List<Movie>) :
 RecyclerView.Adapter<FirstAdapter.ViewHolder>()
 {
+    var onMovieClick: ((Movie)-> Unit)? = null
+
     class ViewHolder(val binding: TextRowItemBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder
@@ -24,6 +27,10 @@ RecyclerView.Adapter<FirstAdapter.ViewHolder>()
         val movie = dataSet[position]
         viewHolder.binding.title.text = movie.title
         viewHolder.binding.studio.text = movie.studio
+
+        viewHolder.binding.root.setOnClickListener{
+            onMovieClick?.invoke(dataSet[position])
+        }
 
         val rating = movie.criticsRating
 
@@ -54,6 +61,11 @@ RecyclerView.Adapter<FirstAdapter.ViewHolder>()
             viewHolder.binding.rating.setTextColor(Color.WHITE)
         }
     }
-
+    // Method to update the dataset
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateMovies(newMovies: List<Movie>) {
+        dataSet = newMovies
+        notifyDataSetChanged()
+    }
 
 }
