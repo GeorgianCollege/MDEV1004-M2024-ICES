@@ -14,4 +14,8 @@
     <string name="description">Short Description</string>
     <string name="mpa_rating">MPA Rating</string>
     <string name="critics_rating">Critics Rating</string>
+    <string name="delete_movie">Delete Movie</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>

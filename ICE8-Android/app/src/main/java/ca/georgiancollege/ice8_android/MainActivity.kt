@@ -3,19 +3,20 @@ package ca.georgiancollege.ice8_android
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ca.georgiancollege.ice8_android.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity()
-{
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MovieViewModel by viewModels()
     private lateinit var firstAdapter: FirstAdapter
     private lateinit var movieList: MutableList<Movie>
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,20 +33,52 @@ class MainActivity : AppCompatActivity()
             firstAdapter.updateMovies(movies)
         }
 
-
         firstAdapter.onMovieClick = { movie ->
-            val intent = Intent(this, DetailsActivity::class.java)
+            val intent = Intent(this, DetailsActivity::class.java).apply {
+                putExtra("MOVIE_ID", movie.id)
+                putExtra("IS_UPDATE", true)
+            }
             startActivity(intent)
         }
 
-
-
-        viewModel.getAllMovies()
-
-        binding.addButton.setOnClickListener{
-            // go to the Details Activity
-            val intent = Intent(this, DetailsActivity::class.java)
+        binding.addButton.setOnClickListener {
+            // go to the Details Activity for adding a new movie
+            val intent = Intent(this, DetailsActivity::class.java).apply {
+                putExtra("IS_UPDATE", false)
+            }
             startActivity(intent)
         }
+
+        // Setup swipe to delete
+        val swipeToDeleteCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                return false // not used
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                AlertDialog.Builder(this@MainActivity).apply {
+                    setTitle(getString(R.string.delete_movie))
+                    setMessage(getString(R.string.are_you_sure))
+                    setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+                        dialog.dismiss()
+                        val position = viewHolder.adapterPosition
+                        val movieId = movieList[position].id
+                        viewModel.deleteMovie(movieId) // Trigger deletion in ViewModel
+                    }
+                    setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                        dialog.dismiss()
+                        firstAdapter.notifyItemChanged(viewHolder.adapterPosition) // Reverts the swipe action visually
+                    }
+                    setCancelable(false)
+                }.create().show()
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(binding.FirstRecyclerView)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAllMovies() // Refresh the movie list
     }
 }
