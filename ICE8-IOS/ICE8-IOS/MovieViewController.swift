@@ -46,13 +46,19 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func fetchMovies(completion: @escaping ([Movie]?, Error?) -> Void)
     {
+        // for next week we need to retrieve the token
+        
+        // Configure the Request
         guard let url = URL(string: "https://mdev1004-m2024-api-q9bi.onrender.com/api/movie/list") else
         {
             print("URL Error")
             completion(nil, nil) // Handle URL error
             return
         }
+        
+        // for authentication we need another step
 
+        // Issue the Request
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 print("Network Error")
@@ -141,4 +147,53 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return cell
     }
+    
+    // New for ICE8
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) 
+    {
+        performSegue(withIdentifier: "AddEditSegue", sender: indexPath)
+    }
+    
+    
+    @IBAction func AddButton_Pressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "AddEditSegue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "AddEditSegue"
+        {
+            if let AddEditVC = segue.destination as? AddEditAPICRUDViewController
+            {
+                AddEditVC.movieViewController = self
+                if let indexPath = sender as? IndexPath
+                {
+                    // Editing an existing movie
+                    let movie = movies[indexPath.row]
+                    AddEditVC.movie = movie
+                } else {
+                    // Adding a new Movie
+                    AddEditVC.movie = nil
+                }
+                
+                // Set the callback closure to reload movies
+                AddEditVC.movieUpdateCallback = { [weak self] in
+                    self?.fetchMovies { movies, error in
+                        if let movies = movies {
+                            self?.movies = movies
+                            DispatchQueue.main.async {
+                                self?.tableView.reloadData()
+                            }
+                        }
+                        else if let error = error
+                        {
+                            print("Failed to fetch movies: \(error)")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
