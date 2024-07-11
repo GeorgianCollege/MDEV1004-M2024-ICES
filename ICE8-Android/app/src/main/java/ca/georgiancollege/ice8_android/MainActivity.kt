@@ -1,5 +1,6 @@
 package ca.georgiancollege.ice8_android
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity()
 
         binding.addButton.setOnClickListener{
             // go to the Details Activity
+            val intent = Intent(this, DetailsActivity::class.java)
+            startActivity(intent)
         }
     }
 }

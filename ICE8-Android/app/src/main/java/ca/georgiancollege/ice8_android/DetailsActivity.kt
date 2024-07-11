@@ -13,5 +13,13 @@ class DetailsActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.updateButton.setOnClickListener{
+            // save a new Movie or Update
+        }
+
+        binding.cancelButton.setOnClickListener{
+            finish()
+        }
     }
 }

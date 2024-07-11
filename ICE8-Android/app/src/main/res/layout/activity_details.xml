@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:ems="8"
             android:inputType="text"
-            android:textSize="10sp"
+            android:textSize="14sp"
             tools:ignore="Autofill,LabelFor,SmallSp,TouchTargetSizeCheck,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:ems="8"
             android:inputType="text"
-            android:textSize="10sp"
+            android:textSize="14sp"
             tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
         <TextView
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:ems="8"
             android:inputType="text"
-            android:textSize="10sp"
+            android:textSize="14sp"
             tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
         <TextView
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:ems="8"
             android:inputType="text"
-            android:textSize="10sp"
+            android:textSize="14sp"
             tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
         <TextView
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:ems="8"
             android:inputType="text"
-            android:textSize="10sp"
+            android:textSize="14sp"
             tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
         <TextView
@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:ems="8"
             android:inputType="text"
-            android:textSize="10sp"
+            android:textSize="14sp"
             tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
         <TextView
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:ems="8"
             android:inputType="text"
-            android:textSize="10sp"
+            android:textSize="14sp"
             tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
         <LinearLayout
@@ -171,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:ems="8"
                     android:inputType="number"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
             </LinearLayout>
 
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:ems="8"
                     android:inputType="number"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
             </LinearLayout>
         </LinearLayout>
@@ -243,7 +243,7 @@
                     android:layout_height="wrap_content"
                     android:ems="8"
                     android:inputType="text"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
             </LinearLayout>
 
@@ -267,7 +267,7 @@
                     android:layout_height="wrap_content"
                     android:ems="8"
                     android:inputType="numberDecimal"
-                    android:textSize="10sp"
+                    android:textSize="14sp"
                     tools:ignore="Autofill,LabelFor,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
             </LinearLayout>
         </LinearLayout>

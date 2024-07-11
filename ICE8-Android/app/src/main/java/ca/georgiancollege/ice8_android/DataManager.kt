@@ -38,4 +38,20 @@ class DataManager private constructor()
     fun getAllMovies(callback: Callback<ApiResponse<List<Movie>>>) {
         service.getAllMovies().enqueue(callback)
     }
+
+    fun getMovieById(id: String?, callback: Callback<ApiResponse<Movie>>){
+        service.getMovieById(id).enqueue(callback)
+    }
+
+    fun addMovie(movie: Movie, callback: Callback<ApiResponse<Movie>>) {
+        service.addMovie(movie).enqueue(callback)
+    }
+
+    fun updateMovie(id: String?, movie: Movie, callback: Callback<ApiResponse<Movie>>) {
+        service.updateMovie(id, movie).enqueue(callback)
+    }
+
+    fun deleteMovie(id: String?, callback: Callback<ApiResponse<String>>) {
+        service.deleteMovie(id).enqueue(callback)
+    }
 }
