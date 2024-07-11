@@ -1,5 +1,6 @@
 package ca.georgiancollege.ice8_android
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -30,10 +31,27 @@ RecyclerView.Adapter<FirstAdapter.ViewHolder>()
         {
             viewHolder.binding.rating.text = rating.toString()
 
+            // Set background drawable based on rating
+            when {
+                rating > 7 -> {
+                    viewHolder.binding.rating.setBackgroundResource(R.drawable.background_green)
+                    viewHolder.binding.rating.setTextColor(Color.BLACK)
+                }
+                rating > 5 -> {
+                    viewHolder.binding.rating.setBackgroundResource(R.drawable.background_yellow)
+                    viewHolder.binding.rating.setTextColor(Color.BLACK)
+                }
+                else -> {
+                    viewHolder.binding.rating.setBackgroundResource(R.drawable.background_red)
+                    viewHolder.binding.rating.setTextColor(Color.WHITE)
+                }
+            }
         }
         else
         {
             viewHolder.binding.rating.text = "N/A"
+            viewHolder.binding.rating.setBackgroundResource(R.drawable.background_gray)
+            viewHolder.binding.rating.setTextColor(Color.WHITE)
         }
     }
 
