@@ -65,10 +65,12 @@ class DetailsActivity : AppCompatActivity()
                 viewModel.addMovie(movie)
             }
 
+            setResult(RESULT_OK) // Indicate successful update/add
             finish()
         }
 
         binding.cancelButton.setOnClickListener{
+            setResult(RESULT_CANCELED)
             finish()
         }
     }

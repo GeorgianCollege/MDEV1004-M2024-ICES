@@ -2,6 +2,7 @@ package ca.georgiancollege.ice8_android
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,14 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MovieViewModel by viewModels()
     private lateinit var firstAdapter: FirstAdapter
     private lateinit var movieList: MutableList<Movie>
+
+    private val detailsActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            viewModel.getAllMovies() // Refresh the movie list
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 putExtra("MOVIE_ID", movie.id)
                 putExtra("IS_UPDATE", true)
             }
-            startActivity(intent)
+            detailsActivityResultLauncher.launch(intent)
         }
 
         binding.addButton.setOnClickListener {
@@ -46,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, DetailsActivity::class.java).apply {
                 putExtra("IS_UPDATE", false)
             }
-            startActivity(intent)
+            detailsActivityResultLauncher.launch(intent)
         }
 
         // Setup swipe to delete
