@@ -125,9 +125,6 @@ export function UpdateMovie(req:Request, res:Response, next:NextFunction): void
     else
     {
         let genres = (req.body.genres) ?  SanitizeArray(req.body.genres as string) : SanitizeArray("");
-
-        console.log("Genres: " + genres);
-
         let directors = (req.body.directors) ? SanitizeArray(req.body.directors as string) : SanitizeArray("");
         let actors = (req.body.actors) ? SanitizeArray(req.body.actors as string) : SanitizeArray("");
         let writers = (req.body.writers) ? SanitizeArray(req.body.writers as string) : SanitizeArray("");
