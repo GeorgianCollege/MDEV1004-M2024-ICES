@@ -155,6 +155,68 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         performSegue(withIdentifier: "AddEditSegue", sender: indexPath)
     }
     
+    // Swipe Left Gesture
+    func tableView(_ tableView: UITableView, commit editingSytle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if(editingSytle == .delete)
+        {
+            let movie = movies[indexPath.row]
+            ShowDeleteConfirmationAlert(for: movie) { confirmed in
+                if(confirmed)
+                {
+                    // delete movie
+                    self.deleteMovie(at: indexPath)
+                }
+            }
+        }
+    }
+    
+    func ShowDeleteConfirmationAlert(for movie: Movie, completion: @escaping (Bool) -> Void)
+    {
+        let alert = UIAlertController(title: "Delete Movie", message: "Are you sure you want to delete this movie?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            completion(false)
+        })
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+            completion(true)
+        })
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func deleteMovie(at indexPath: IndexPath)
+    {
+        let movie = movies[indexPath.row]
+        
+        // for next week - we need a Token
+        
+        guard let url = URL(string: "https://mdev1004-m2024-api-q9bi.onrender.com/api/movie/delete/\(movie._id)") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        // for next week we need to apply the bearer token here
+        
+        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            if let error = error {
+                print("Failed to delete movie: \(error)")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.movies.remove(at: indexPath.row)
+                self?.tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
+        }
+        
+        task.resume()
+    }
+    
     
     @IBAction func AddButton_Pressed(_ sender: UIButton) {
         performSegue(withIdentifier: "AddEditSegue", sender: nil)

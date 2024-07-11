@@ -31,8 +31,6 @@ class AddEditAPICRUDViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("ADD / EDIT ViewController")
-        
         if let movie = movie 
         {
             // Editing an Existing Movie
