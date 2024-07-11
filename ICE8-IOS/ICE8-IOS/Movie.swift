@@ -7,6 +7,7 @@ struct Movie: Codable
     let genres: [String]?
     let directors: [String]?
     let writers: [String]?
+    let actors: [String]?
     let year: Int?
     let length: Int?
     let shortDescription: String?
