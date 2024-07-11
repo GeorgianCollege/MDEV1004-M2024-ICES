@@ -30,5 +30,9 @@ class MainActivity : AppCompatActivity()
         }
 
         viewModel.getAllMovies()
+
+        binding.addButton.setOnClickListener{
+            // go to the Details Activity
+        }
     }
 }
