@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ICE9-Android</string>
+    <string name="favourite_movies">Favourite Movies</string>
+    <string name="movieid">Movie ID</string>
+    <string name="title">Title</string>
+    <string name="studio">Studio</string>
+    <string name="genres">Genres</string>
+    <string name="directors">Directors</string>
+    <string name="writers">Writers</string>
+    <string name="actors">Actors</string>
+    <string name="edit_movie">Edit Movie</string>
+    <string name="length">Length</string>
+    <string name="year">Year</string>
+    <string name="description">Short Description</string>
+    <string name="mpa_rating">MPA Rating</string>
+    <string name="critics_rating">Critics Rating</string>
+    <string name="delete_movie">Delete Movie</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+</resources>
