@@ -29,6 +29,7 @@ class APILoginViewController: UIViewController {
         }
             
         let urlString = "https://mdev1004-m2024-api-q9bi.onrender.com/api/login"
+        //let urlString = "http://localhost:3000/api/login"
         guard let url = URL(string: urlString) else
         {
             print("Invalid URL")
@@ -37,9 +38,10 @@ class APILoginViewController: UIViewController {
         
         // Configure the request
         let parameters = ["username": username, "password":password]
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("appliction/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         do 
         {

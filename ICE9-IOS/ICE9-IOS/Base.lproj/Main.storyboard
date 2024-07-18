@@ -496,7 +496,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="new-password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gfi-Is-3Cc" userLabel="CancelButton">
-                                <rect key="frame" x="20" y="763" width="183" height="35"/>
+                                <rect key="frame" x="9" y="763" width="183" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
@@ -504,11 +504,11 @@
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="CancelButton_Pressed:" destination="Nw0-kE-FxE" eventType="touchUpInside" id="ijt-SN-TTu"/>
+                                    <action selector="cancelButton_Pressed:" destination="Nw0-kE-FxE" eventType="touchUpInside" id="rFY-s3-G5r"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZi-HB-pHk" userLabel="RegisterButton">
-                                <rect key="frame" x="227" y="763" width="183" height="35"/>
+                                <rect key="frame" x="200" y="763" width="183" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                 <state key="normal" title="Button"/>
@@ -516,7 +516,7 @@
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="registerButton_Pressed:" destination="Nw0-kE-FxE" eventType="touchUpInside" id="6GX-7f-HB2"/>
+                                    <action selector="registerButton_Pressed:" destination="Nw0-kE-FxE" eventType="touchUpInside" id="JAQ-2g-aGV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -524,6 +524,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="OsF-gW-v21"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="8AB-7F-S8w" id="sTg-k2-rMO"/>
+                        <outlet property="emailTextField" destination="NNq-Qq-Xf5" id="e8p-Jw-1Ta"/>
+                        <outlet property="firstNameTextField" destination="Bij-RS-VoU" id="Gjs-9H-KLz"/>
+                        <outlet property="lastNameTextField" destination="tTR-Om-DJR" id="I5O-3B-HS2"/>
+                        <outlet property="passwordTextField" destination="zTk-NJ-rWz" id="40n-Qk-UOe"/>
+                        <outlet property="usernameTextField" destination="TiD-f6-Vf1" id="GqA-Je-4qj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pv4-bo-Wt8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
