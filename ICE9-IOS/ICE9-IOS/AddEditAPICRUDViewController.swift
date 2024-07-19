@@ -67,7 +67,12 @@ class AddEditAPICRUDViewController: UIViewController
     
     @IBAction func UpdateButton_Pressed(_ sender: UIButton)
     {
-        // For Next Week - we need to retrieve the token
+        // Retrieve AuthToken
+        guard let authToken = UserDefaults.standard.string(forKey: "AuthToken") else
+        {
+            print("AuthToken not available")
+            return
+        }
         
         // Configure the Request
         let urlString: String
@@ -125,7 +130,7 @@ class AddEditAPICRUDViewController: UIViewController
         var request = URLRequest(url: url)
         request.httpMethod = requestType
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        // next week - add the bearer token here
+        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
         //Request
         do {
