@@ -46,7 +46,13 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func fetchMovies(completion: @escaping ([Movie]?, Error?) -> Void)
     {
-        // for next week we need to retrieve the token
+        // Retrieve Authtoken from UserDefaults
+        guard let authToken = UserDefaults.standard.string(forKey: "AuthToken") else
+        {
+            print("AuthToken not available")
+            completion(nil, nil)
+            return
+        }
         
         // Configure the Request
         guard let url = URL(string: "https://mdev1004-m2024-api-q9bi.onrender.com/api/movie/list") else
@@ -57,7 +63,9 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return
         }
         
-        // for authentication we need another step
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
 
         // Issue the Request
         URLSession.shared.dataTask(with: url) { data, _, error in
@@ -190,7 +198,11 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         let movie = movies[indexPath.row]
         
-        // for next week - we need a Token
+        guard let authToken = UserDefaults.standard.string(forKey: "AuthToken") else
+        {
+            print("AuthToken not available")
+            return
+        }
         
         guard let url = URL(string: "https://mdev1004-m2024-api-q9bi.onrender.com/api/movie/delete/\(movie._id)") else {
             print("Invalid URL")
@@ -199,7 +211,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
-        // for next week we need to apply the bearer token here
+        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             if let error = error {
@@ -258,5 +270,16 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    @IBAction func logoutButton_Pressed(_ sender: UIButton) 
+    {
+        // Remove the token from UserDefaults or local storage -> indicates a logout
+        UserDefaults.standard.removeObject(forKey: "AuthToken")
+        
+        // Clear the username and password in the LoginViewController
+        APILoginViewController.shared?.ClearLoginTextFields()
+        
+        // unwind
+        performSegue(withIdentifier: "unwindToLogin", sender: self)
+    }
     
 }
