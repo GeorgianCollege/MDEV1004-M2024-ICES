@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-
+    implementation("com.braintreepayments.api:drop-in:6.13.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
